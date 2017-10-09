@@ -1,0 +1,30 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "IoTHubName": {
+            "defaultValue": "",
+            "type": "String",
+            "metadata": {
+                "description": "The name of the IoT Hub that you want to create."
+            }
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Devices/IotHubs",
+            "sku": {
+                "name": "S1",
+                "tier": "Standard",
+                "capacity": 1
+            },
+            "name": "[parameters('IoTHubName')]",
+            "apiVersion": "2016-02-03",
+            "location": "westeurope",
+            "tags": {},
+            "scale": null,
+            "dependsOn": []
+        }
+    ]
+}
