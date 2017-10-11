@@ -8,6 +8,12 @@ sudo apt-get install npm
 sudo npm install -g npm@2.x
 ```
 
+
+
+## Create new nodejs project
+
+npm init
+
 ## Packages for IoT Hub communication
 
 ```
@@ -24,11 +30,20 @@ sudo npm install -g iot-explorer@latest
 ## Create a new device
 
 ```
-Iot-explorer login "<IoT Hub Connection string>"
-Iot-explorer create <DeviceName> --connection-string
+iot-explorer login "<IoT Hub Connection string>"
+iot-explorer create <DeviceName> --connection-string
 ```
 
+
+## Add Connection String to Environment Variable AZURE_IOT_HUB_DEVICE
+
+
+
 ## Working with the device explorer
+
+
+
+
 
 # Summary
 

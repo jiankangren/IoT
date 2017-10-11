@@ -22,6 +22,15 @@ az iot hub create --name "oscheeriothub" --resource-group "oscheeriotrg" --sku S
 az iot hub show-connection-string 
 
 
+# list existing device
+az iot device list --hub-name oscheeriothub
+
+# create new device
+az iot device create --hub-name oscheeriothub --device-id VirtualDevice002
+
+# get connection string for device
+az iot device show-connection-string --device-id VirtualDevice002 --hub-name oscheeriothub 
+
 ##### Clean up
 
 # Delete IoT Hub

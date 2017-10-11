@@ -1,47 +1,105 @@
-// HostName=syskron.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=xQTZ58Ozl5KD5svH4JqwUxT4CDBdRU9HH63HO33VyLw=
-// myVirtualDevice001
-
-var deviceId = 'myVirtualDevice001';
-var connectionString = 'HostName=syskron.azure-devices.net;DeviceId=myVirtualDevice001;SharedAccessKey=LxZd7eRWiG1fCFtfjh8nLFQB3p7xVTdPauSNL5LT674=';
+'use strict';
 
 // Read values from local environment
-var deviceId = process.env.AZURE_IOT_DEVICE_ID; 
-var connectionString = process.env.AZURE_IOT_HUB_CONNECTIONSTRING;
+var deviceConnectionString = process.env.AZURE_IOT_HUB_DEVICE; 
 
-console.log("Device Id        : " + deviceId)
-console.log("Connection string: " + connectionString);
+console.log("Device Connection String  : " + deviceConnectionString)
+
+if (deviceConnectionString === undefined) {
+  console.error("Device Connection String not set correctly via Environment-Variable 'AZURE_IOT_HUB_DEVICE'.");
+  return;
+}
 
 var clientFromConnectionString = require('azure-iot-device-http').clientFromConnectionString;
-
-var client = clientFromConnectionString(connectionString);
-
+var client = clientFromConnectionString(deviceConnectionString);
 var Message = require('azure-iot-device').Message;
-var msg = new Message('some data from my device');
 
-var updateIntervalInMilliseconds = 1000;
+// Update interval in milliseconds of sensor values 
+var updateIntervalInMilliseconds = 5000;
 
-var connectCallback = function (err) {
-  if (err) {
-    console.error('Could not connect: ' + err);
-  } else {
-    console.log('Client connected');
+var initConfigChange = function(twin) {
+  var currentTelemetryConfig = twin.properties.reported.telemetryConfig;
+  currentTelemetryConfig.pendingConfig = twin.properties.desired.telemetryConfig;
+  currentTelemetryConfig.status = "Pending";
 
-    setInterval(sendData, updateIntervalInMilliseconds);
+  var patch = {
+  telemetryConfig: currentTelemetryConfig
+  };
+  twin.properties.reported.update(patch, function(err) {
+      if (err) {
+          console.log('Could not report properties');
+      } else {
+          console.log('Reported pending config change: ' + JSON.stringify(patch));
+          setTimeout(function() {completeConfigChange(twin);}, 60000);
+      }
+  });
+}
 
-  
-  }
+var completeConfigChange =  function(twin) {
+  var currentTelemetryConfig = twin.properties.reported.telemetryConfig;
+  currentTelemetryConfig.configId = currentTelemetryConfig.pendingConfig.configId;
+  currentTelemetryConfig.sendFrequency = currentTelemetryConfig.pendingConfig.sendFrequency;
+  currentTelemetryConfig.status = "Success";
+  delete currentTelemetryConfig.pendingConfig;
+
+  var patch = {
+      telemetryConfig: currentTelemetryConfig
+  };
+  patch.telemetryConfig.pendingConfig = null;
+
+  twin.properties.reported.update(patch, function(err) {
+      if (err) {
+          console.error('Error reporting properties: ' + err);
+      } else {
+          console.log('Reported completed config change: ' + JSON.stringify(patch));
+      }
+  });
 };
 
-client.open(connectCallback);
+
+client.open(
+  function (err) {
+    if (err) {
+      // Error
+      console.error('Could not connect to IoT Hub: ' + err);
+    } else {
+      // Success
+      console.log('Client connected');
+      // register Device Twin
+      client.getTwin(function () {
+        if (err) {
+          console.error("could not get twin");
+        } else {
+          console.log("retrieved device twin");
+          twin.properties.reported.telemetryConfig = {
+              configId: "0",
+              sendFrequency: "24h"
+          }
+          twin.on('properties.desired', function(desiredChange) {
+            console.log("received change: "+JSON.stringify(desiredChange));
+            var currentTelemetryConfig = twin.properties.reported.telemetryConfig;
+              if (desiredChange.telemetryConfig &&desiredChange.telemetryConfig.configId !== currentTelemetryConfig.configId) {
+                  initConfigChange(twin);
+              }
+          });
+
+        }
+      });
+      // Start processing 
+      startAndUpdateInterval(updateIntervalInMilliseconds);
+    }
+  });
+
+function startAndUpdateInterval(updateIntervalInMilliseconds) {
+  setInterval(sendData, updateIntervalInMilliseconds);
+}
 
 function sendData() {
-  // console.log("sendData");
-  
+  // Simulated values 
   var temperature = 20 + (Math.random() * 15);
   var humidity = 60 + (Math.random() * 20);            
-  var data = JSON.stringify({ deviceId: deviceId, temperature: temperature, humidity: humidity });
+  var data = JSON.stringify({ temperature: temperature, humidity: humidity });
     
-  // var message = new Message('some data from my device');
   var message = new Message(data);
 
   client.sendEvent(message, function (err) {
@@ -51,20 +109,4 @@ function sendData() {
       console.log("send successful: " + data);
     }
   });
-
-  // client.on('message', function (msg) {
-  //   console.log(msg);
-  //   client.complete(msg, function () {
-  //     console.log('completed');
-  //   });
-  // });
-
-  // console.log("sendData.done.");
 }
-
-
-
-// var message = new Message(data);
-// message.properties.add('temperatureAlert', (temperature > 30) ? 'true' : 'false');
-// console.log("Sending message: " + message.getData());
-// client.sendEvent(message, printResultFor('send'));
