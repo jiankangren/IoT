@@ -1,7 +1,7 @@
 {
-  "name": "node-js-sensor-value-emulator",
+  "name": "raspberry-sensehat",
   "version": "1.0.0",
-  "description": "A simulator for sensor values",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,6 +12,7 @@
     "azure-iot-device": "^1.1.19",
     "azure-iot-device-mqtt": "^1.2.0",
     "azure-iothub": "^1.1.17",
+    "node-sense-hat": "0.0.2",
     "node-uuid": "^1.4.8"
   }
 }

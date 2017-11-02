@@ -1,7 +1,9 @@
 # Preparing your Raspberry Pi 2 (or 3) 
 
 In this tutorial you will learn how to setup your Raspyberry Pi without keyboard, mouse, and monitor. 
-My other tutorials are based on this type of installation.
+Some of my other tutorials are based on this type of installation.
+
+![Raspberry Pi 2](images/raspberrypi2.jpeg)
 
 ## Step 1: Download Raspbian Image
 
@@ -134,4 +136,4 @@ DNS on Windows needs sometimes a while
 
 ## Summary
 
-Now you have a Raspberry Pi, which is ready to use with VNC and File Access with a share. This setup is used in in the next tutorials.
+Now you have a Raspberry Pi, which is ready to use with VNC and File Access with a share. This setup is used in the next tutorials.
