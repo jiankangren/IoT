@@ -1,0 +1,31 @@
+﻿<Page
+    x:Class="HomeSensorApp.Views.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HomeSensorApp.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" DataContext="{StaticResource ApplicationSettings}">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ScrollViewer Margin="40,0,40,0">
+            <StackPanel>
+                <TextBlock Text="Device Id" />
+                <TextBox Text="{Binding DeviceId, Mode=TwoWay}" />
+
+                <TextBlock Padding="0,16,0,0" Text="HostName" />
+                <TextBox Text="{Binding HostName}" />
+
+                <TextBlock Padding="0,16,0,0" Text="SharedAccessKey" />
+                <TextBox Text="{Binding SharedAccessKey}" />
+
+                <TextBlock Padding="0,16,0,0" Text="DeviceConnectionString" />
+                <TextBlock Text="{Binding DeviceConnectionString}" />
+
+                <TextBlock Padding="0,16,0,0" Text="Update Interval in Milliseconds" />
+                <TextBox Text="{Binding UpdateInterval}" />
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

@@ -1,0 +1,42 @@
+﻿<Page
+    x:Class="HomeSensorApp.Views.RootPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HomeSensorApp.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" DataContext="{StaticResource ApplicationSettings}">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid>
+            <TextBlock VerticalAlignment="Center" Margin="40,0,0,0" FontSize="20" HorizontalAlignment="Left" Text="{Binding ApplicationTitle}"/>
+
+            <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0">
+                <!-- Clock -->
+                <TextBlock x:Name="_clock" Text="12:34:56 12.03.2017" Foreground="White" FontSize="20"/>
+            </Grid>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,40,0">
+                <Button Margin="8" x:Name="_home" Content="Home" Click="_home_Click" />
+                <Button Margin="8" x:Name="_settings" Content="Settings" Click="_settings_Click" />
+            </StackPanel>
+        </Grid>
+
+        <!-- Frame -->
+        <Grid Grid.Row="1" Grid.RowSpan="2">
+            <Frame x:Name="_root" Grid.RowSpan="2" />
+        </Grid>
+        
+        <!-- Footer -->
+        <Grid Grid.Row="2">
+            <TextBlock x:Name="_status" TextWrapping="Wrap" Text="{Binding StatusMessage}" Margin="40,0,40,0"/>
+        </Grid>
+    </Grid>
+</Page>

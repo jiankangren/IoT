@@ -55,12 +55,22 @@ Maybe the image is a few days old. To get the latest and greatest version of Ras
 
 ```
 $ sudo apt-get update
-$ sudo apt-get $ dist-upgrade
+$ sudo apt-get dist-upgrade
 ```
 
 ## Step 7: Configure access for remote desktop
 
-To access your Raspberry via another computer over a remote desktop connection, you can use vnc (which is already installed in the Raspian Image). But before using it, you have to enable VNC via the Configuration of the "Interfaces".
+To access your Raspberry via another computer over a remote desktop connection, you can use vnc (which is already installed in the Raspian Image). You have to enable it first.
+
+### Headless option
+If you are connected only via network. You can use: 
+
+``` 
+sudo raspi-config
+``` 
+
+### Display/keyboard/mouse connected
+
 
 ![Enabling VNC](images/enablevnc.png)
 
@@ -133,6 +143,25 @@ If it doesn't work, try
 \\\\youripaddress\pishare
 
 DNS on Windows needs sometimes a while
+
+## Step 10: Install Docker
+
+Docker is also available for the Raspberry PI: 
+[https://www.raspberrypi.org/blog/docker-comes-to-raspberry-pi/](https://www.raspberrypi.org/blog/docker-comes-to-raspberry-pi/)
+
+The installation is done with one single command:
+
+```
+curl -sSL https://get.docker.com | sh
+
+sudo usermod -aG docker pi
+```
+
+Fix https://github.com/moby/moby/issues/22635
+
+add the following line to /etc/resolv.conf
+nameserver 8.8.8.8
+
 
 ## Summary
 

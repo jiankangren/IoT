@@ -1,0 +1,29 @@
+﻿<UserControl
+    x:Class="HomeSensorApp.Views.DetailedSensorHubControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HomeSensorApp.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid>
+        <StackPanel Margin="8">
+            <TextBlock Text="{Binding Name}" Foreground="Yellow" />
+            <TextBlock Text="{Binding StatusMessage}" Foreground="Yellow" />
+            <ListView ItemsSource="{Binding Sensors}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" >
+                            <TextBlock Text="{Binding Name}" Foreground="Green"/>
+                            <TextBlock Text=":" />
+                            <TextBlock Text="{Binding SensorValue}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</UserControl>
