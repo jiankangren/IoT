@@ -10,6 +10,7 @@
     <Application.Resources>
         <models:ApplicationSettings x:Key="ApplicationSettings" />
         <services:SensorService x:Key="SensorService" />
+        <services:IotHubService x:Key="IoTHubService" />
     </Application.Resources>
     
 </Application>

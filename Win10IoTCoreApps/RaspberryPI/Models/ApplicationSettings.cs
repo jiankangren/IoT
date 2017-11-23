@@ -1,4 +1,5 @@
 ﻿using HomeSensorApp.Services;
+using System;
 using Windows.Storage;
 
 namespace HomeSensorApp.Models
@@ -7,21 +8,17 @@ namespace HomeSensorApp.Models
     {
         public ApplicationSettings()
         {
-            // If not design time, try to load saved settings
-
             _localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-
-            _iotHub = new IotHubService();
-            UpdateConnection();
         }
 
         ApplicationDataContainer _localSettings;
-        IotHubService _iotHub;
 
         private void UpdateConnection()
         {
-            _iotHub.SetConnectionString(DeviceConnectionString);
+            SettingsUpdated?.Invoke(this, EventArgs.Empty);
         }
+
+        public event EventHandler SettingsUpdated;
 
         #region Strings
 
@@ -39,22 +36,16 @@ namespace HomeSensorApp.Models
         {
             get
             {
-                string result = $"HostName={_hostName};DeviceId={_deviceId};SharedAccessKey={_sharedAccessKey}";
+                string result = $"HostName={this.HostName};DeviceId={this.DeviceId};SharedAccessKey={this.SharedAccessKey}";
                 return result;
             }
         }
         
-        // default values
-        private string _deviceId = "winpi001";
-        private string _hostName = "oscheeriothub.azure-devices.net";
-        private string _sharedAccessKey = "V05R254hEkusyL6ud27HVgeQpzAoAmNIXQRtDUBDAaI=";
-        private int _updateInterval = 5000;
-
         public int UpdateInterval
         {
             get
             {
-                return GetValueAsInt("UpdateInterval", _updateInterval);
+                return GetValueAsInt("UpdateInterval", Settings.DefaultUpdateInterval);
             }
             set
             {
@@ -66,7 +57,7 @@ namespace HomeSensorApp.Models
         {
             get
             {
-                return GetValueAsString("DeviceId", _deviceId);
+                return GetValueAsString("DeviceId", Settings.DefaultDeviceId);
             }
             set
             {
@@ -79,7 +70,7 @@ namespace HomeSensorApp.Models
         {
             get
             {
-                return GetValueAsString("HostName", _hostName);
+                return GetValueAsString("HostName", Settings.DefaultHostName);
             }
             set
             {
@@ -92,7 +83,7 @@ namespace HomeSensorApp.Models
         {
             get
             {
-                return GetValueAsString("SharedAccessKey", _sharedAccessKey);
+                return GetValueAsString("SharedAccessKey", Settings.DefaultSharedAccessKey);
             }
             set
             {

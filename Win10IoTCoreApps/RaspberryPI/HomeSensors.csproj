@@ -100,7 +100,7 @@
     <Compile Include="Models\BaseSensorHub.cs" />
     <Compile Include="Models\Fezhat\BaseFezhatSensor.cs" />
     <Compile Include="Models\Fezhat\FezhatSensorHub.cs" />
-    <Compile Include="Models\Fezhat\FezhatTemperatureSensor - Copy.cs" />
+    <Compile Include="Models\Fezhat\FezhatLightSensor.cs" />
     <Compile Include="Models\Fezhat\FezhatTemperatureSensor.cs" />
     <Compile Include="Models\Sensehat\BaseSensehatSensor.cs" />
     <Compile Include="Models\Sensehat\Compass.cs" />
@@ -108,7 +108,7 @@
     <Compile Include="Models\Sensehat\SenseHatSensorHub.cs" />
     <Compile Include="Models\Sensehat\SensehatPressureSensor.cs" />
     <Compile Include="Models\Sensehat\SensehatTemperatureSensor.cs" />
-    <Compile Include="Models\SensorValuesUpdatedEventArgs.cs" />
+    <Compile Include="Models\SensorValuePackage.cs" />
     <Compile Include="Models\Simulator\SimulatedTemperature.cs" />
     <Compile Include="Models\Simulator\SimulatedSensorHub.cs" />
     <Compile Include="Models\Simulator\SimulatedWindspeed.cs" />
@@ -118,6 +118,7 @@
     <Compile Include="Services\IotHubService.cs" />
     <Compile Include="Services\SensorService.cs" />
     <Compile Include="Services\StatusMessageEventArgs.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="Views\DetailedSensorHubControl.xaml.cs">
       <DependentUpon>DetailedSensorHubControl.xaml</DependentUpon>
     </Compile>

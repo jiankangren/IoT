@@ -7,6 +7,21 @@ namespace HomeSensorApp.Models
     public abstract class BaseSensor : NotifyPropertyBase
     {
 
+        public BaseSensor()
+        {
+            if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
+            {
+                return;
+            }
+
+            App.AppSettings.SettingsUpdated += AppSettings_SettingsUpdated;
+        }
+
+        private void AppSettings_SettingsUpdated(object sender, EventArgs e)
+        {
+            UpdateTimer();
+        }
+
         public abstract string Name { get; }
 
         private bool _updateIntervalEnabled = false;
@@ -24,10 +39,9 @@ namespace HomeSensorApp.Models
             }
         }
 
-        //DispatcherTimer _timer;
         Timer timer;
 
-        private async void UpdateTimer()
+        private void UpdateTimer()
         {
             if (timer != null)
             {
@@ -71,7 +85,7 @@ namespace HomeSensorApp.Models
             SensorValue = sensorValue.ToString();
             if (SensorValuesUpdated != null)
             {
-                var args = new SensorValuesUpdatedEventArgs();
+                var args = new SensorValuePackage();
                 args.SensorName = Name;
                 args.SensorValue = sensorValue;
                 args.SensorHubName = Parent.Name;
@@ -79,7 +93,7 @@ namespace HomeSensorApp.Models
             }
         }
 
-        public event EventHandler<SensorValuesUpdatedEventArgs> SensorValuesUpdated;
+        public event EventHandler<SensorValuePackage> SensorValuesUpdated;
         
     }
 }

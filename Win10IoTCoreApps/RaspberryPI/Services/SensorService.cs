@@ -1,5 +1,7 @@
 ﻿using HomeSensorApp.Models;
+using HomeSensorApp.Models.Fezhat;
 using HomeSensorApp.Models.Sensehat;
+using HomeSensorApp.Models.Simulator;
 using System;
 using System.Collections.ObjectModel;
 using Windows.ApplicationModel.Core;
@@ -21,38 +23,48 @@ namespace HomeSensorApp.Services
             // 
             // Fezhat
             //  
-            //var fezhat = new FezhatSensorHub();
-            //fezhat.SuccessfulInitialized += (s, e) =>
-            //{
-            //    if (fezhat.IsSensorHubInstalled)
-            //    {
-            //        App.AppSettings.AddSensorHub(fezhat);
-            //    }
-            //};
-            //fezhat.StartInitialize();
+            if (Settings.IsFezhatInstalled)
+            {
+                var fezhat = new FezhatSensorHub();
+                fezhat.SuccessfulInitialized += (s, e) =>
+                {
+                    if (fezhat.IsSensorHubInstalled)
+                    {
+                        AddSensorHub(fezhat);
+                    }
+                };
+                fezhat.StartInitialize();
+            }
 
             // 
             // Sensehat
             // 
-            var sensehat = new SenseHatSensorHub();
-            sensehat.SuccessfulInitialized += (s, e) =>
+            if (Settings.IsSensehatInstalled)
             {
-                if (sensehat.IsSensorHubInstalled)
+                var sensehat = new SenseHatSensorHub();
+                sensehat.SuccessfulInitialized += (s, e) =>
                 {
-                    AddSensorHub(sensehat);
-                }
-            };
-            sensehat.StartInitialize();
+                    if (sensehat.IsSensorHubInstalled)
+                    {
+                        AddSensorHub(sensehat);
+                    }
+                };
+                sensehat.StartInitialize();
+            }
 
-            //// 
-            //// Sensor Simulator
-            //// 
-            //var sim = new SimulatedSensorHub();
-            //sim.StartInitialize();
-            //if (sim.IsSensorHubInstalled)
-            //{
-            //    App.AppSettings.AddSensorHub(sim);
-            //}
+            // 
+            // Sensor Simulator
+            // 
+            if (Settings.IsSimulatedSensorAvailable)
+            {
+                var sim = new SimulatedSensorHub();
+                sim.StartInitialize();
+                if (sim.IsSensorHubInstalled)
+                {
+                    AddSensorHub(sim);
+                }
+            }
+
         }
 
         private ObservableCollection<BaseSensorHub> _sensorHubs = new ObservableCollection<BaseSensorHub>();
@@ -70,21 +82,23 @@ namespace HomeSensorApp.Services
                 () =>
                 {
                     _sensorHubs.Add(sensorHub);
-                    //OnPropertyChanged("SensorHubs");
-                    //_output.Text = text;
                 });
         }
 
-        private void Sensor_SensorValuesUpdated(object sender, SensorValuesUpdatedEventArgs e)
+        private void Sensor_SensorValuesUpdated(object sender, SensorValuePackage e)
         {
             string message = $"{e.SensorHubName}.{e.SensorName} = {e.SensorValue}";
-            //StatusMessage = message + Environment.NewLine + StatusMessage;
-
             OnStatusMessageUpdate(message);
 
-            // Send Message to IoT Hub
-            //_iotHub.SendDeviceToCloud(e.SensorHubName, e.SensorName, e.SensorValue);
+            OnSensorValueUpdated(e);
         }
+
+        private void OnSensorValueUpdated(SensorValuePackage e)
+        {
+            SensorDataUpdated?.Invoke(this, e);
+        }
+
+        public event EventHandler<SensorValuePackage> SensorDataUpdated;
 
         private void OnStatusMessageUpdate(string message)
         {

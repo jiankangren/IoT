@@ -26,7 +26,9 @@ namespace HomeSensorApp
 
         private static SensorService _sensorService;
         public static SensorService SensorService { get => _sensorService; set => _sensorService = value; }
+        public static IotHubService IotHubService { get => _iotHubService; set => _iotHubService = value; }
 
+        private static IotHubService _iotHubService;
 
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
@@ -62,16 +64,40 @@ namespace HomeSensorApp
 
                 AppSettings = (ApplicationSettings)Resources["ApplicationSettings"];
                 SensorService = (SensorService)Resources["SensorService"]; // new SensorService();
-                //SensorService.CreateSensors(AppSettings);
+                IotHubService = (IotHubService)Resources["IoTHubService"];
+                IotHubService.SetSettings(AppSettings);
+
+                // When Settings are updated
+                AppSettings.SettingsUpdated += (s, ee) =>
+                {
+                    // Reconfigure Connection to IoT Hub
+                    IotHubService.SetSettings(AppSettings);
+                };
+
+                // When Sensor Data is received
+                SensorService.SensorDataUpdated += (s, ee) =>
+                {
+                    // Send data to IoT Hub
+                    IotHubService.SendDeviceToCloud(ee);
+                };
 
                 Window.Current.Activate();
                 AppDispatcher = Window.Current.Dispatcher;
+
+                this.UnhandledException += (s, ee) =>
+                {
+                    IotHubService.SendStatusMessage("UnhandledException", ee.Message);
+                };
+
+                IotHubService.SendStatusMessage("Launched", "Successfull");
             }
         }
 
         void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
-            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
+            string message = "Failed to load Page " + e.SourcePageType.FullName;
+            IotHubService.SendStatusMessage("OnNavigationFailed", message);
+            throw new Exception(message);
         }
 
         private void OnSuspending(object sender, SuspendingEventArgs e)
@@ -79,6 +105,9 @@ namespace HomeSensorApp
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+            IotHubService.SendStatusMessage("OnSuspending", "");
         }
+
+        
     }
 }

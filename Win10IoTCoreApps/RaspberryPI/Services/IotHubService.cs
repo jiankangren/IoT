@@ -2,45 +2,54 @@
 using Newtonsoft.Json;
 using System;
 using System.Text;
+using HomeSensorApp.Models;
 
 namespace HomeSensorApp.Services
 {
     public class IotHubService
     {
-        public void SetConnectionString(string connectionString)
+        public IotHubService()
         {
-            //_connectionString = connectionString;
-            //deviceClient = DeviceClient.Create(iotHubUri, new DeviceAuthenticationWithRegistrySymmetricKey("myFirstDevice", deviceKey), TransportType.Mqtt);
-            _deviceClient = DeviceClient.CreateFromConnectionString(connectionString);
 
-            //SendDeviceToCloudMessagesAsync();
-            //Console.ReadLine();
+        }
+
+        internal void SetSettings(ApplicationSettings appSettings)
+        {
+            SetConnectionString(appSettings.DeviceConnectionString);
+        }
+
+        private void SetConnectionString(string connectionString)
+        {
+            _deviceClient = DeviceClient.CreateFromConnectionString(connectionString);
         }
 
         DeviceClient _deviceClient;
-        //string iotHubUri = "{iot hub hostname}";
-        //string deviceKey = "{device key}";
 
-        public async void SendDeviceToCloud(string sensorHubName, string sensorName, object sensorValue)
+        public async void SendDeviceToCloud(SensorValuePackage sensorValue)
         {
-                //double currentTemperature = minTemperature + rand.NextDouble() * 15;
-                //double currentHumidity = minHumidity + rand.NextDouble() * 20;
+            var telemetryDataPoint = new
+            {
+                sensorHubName = sensorValue.SensorHubName,
+                sensorName = sensorValue.SensorName,
+                sensorValue = sensorValue.SensorValue
+            };
+            var messageString = JsonConvert.SerializeObject(telemetryDataPoint);
+            var message = new Message(Encoding.ASCII.GetBytes(messageString));
+            //message.Properties.Add("temperatureAlert", (currentTemperature > 30) ? "true" : "false");
 
-                var telemetryDataPoint = new
-                {
-                    sensorHubName = sensorHubName,
-                    sensorName = sensorName,
-                    sensorValue = sensorValue
-                };
-                var messageString = JsonConvert.SerializeObject(telemetryDataPoint);
-                var message = new Message(Encoding.ASCII.GetBytes(messageString));
-                //message.Properties.Add("temperatureAlert", (currentTemperature > 30) ? "true" : "false");
-
-                await _deviceClient.SendEventAsync(message);
-                Console.WriteLine("{0} > Sending message: {1}", DateTime.Now, messageString);
-
+            await _deviceClient.SendEventAsync(message);
+            Console.WriteLine("{0} > Sending message: {1}", DateTime.Now, messageString);
         }
 
-       
+        public void SendStatusMessage(string source, string message)
+        {
+            SensorValuePackage data = new SensorValuePackage();
+            data.SensorHubName = "App";
+            data.SensorName = source;
+            data.SensorValue = message;
+
+            SendDeviceToCloud(data);
+        }
+
     }
 }
