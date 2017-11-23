@@ -6,7 +6,7 @@
 
         public override void GetValue()
         {
-            _sensehat.Sensors.ImuSensor.Update();
+            _sensehat.Sensors.HumiditySensor.Update();
             var temp = _sensehat.Sensors.Temperature;
             SensorValueUpdated(temp);
         }

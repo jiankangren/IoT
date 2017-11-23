@@ -1,7 +1,9 @@
 ﻿using HomeSensorApp.Services;
 using System;
 using System.Collections.ObjectModel;
+using Windows.ApplicationModel.Core;
 using Windows.Storage;
+using Windows.UI.Core;
 
 namespace HomeSensorApp.Models
 {
@@ -10,16 +12,48 @@ namespace HomeSensorApp.Models
 
         public ApplicationSettings()
         {
+            // Must be first command for some reasons
+            
+            //Task.Run(async () =>
+            //{
+            //    try
+            //    {
+
+            //        ISenseHat senseHat = await SenseHatFactory.GetSenseHat().ConfigureAwait(false);
+
+            //        while (1 == 1)
+            //        {
+
+            //            senseHat.Sensors.HumiditySensor.Update();
+            //            var temp = senseHat.Sensors.Temperature;
+            //            Debug.WriteLine($"Temp: {temp}");
+            //            //UpdateSensor(temp);
+            //            //Sleep(new TimeSpan(0, 0, 1));
+            //        }
+            //    }
+            //    catch (Exception exc)
+            //    {
+            //        Debug.WriteLine(exc.Message);
+            //    }
+
+
+            //}).ConfigureAwait(false);
+
+
             // If not design time, try to load saved settings
 
             _localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
 
             _iotHub = new IotHubService();
             UpdateConnection();
+
+            //_sensorService = new SensorService();
+            //_sensorService.CreateSensors();
         }
 
         ApplicationDataContainer _localSettings;
         IotHubService _iotHub;
+        //SensorService _sensorService;
 
         private void UpdateConnection()
         {
@@ -31,13 +65,23 @@ namespace HomeSensorApp.Models
         private ObservableCollection<BaseSensorHub> _sensorHubs = new ObservableCollection<BaseSensorHub>();
         public ObservableCollection<BaseSensorHub> SensorHubs { get => _sensorHubs; set => _sensorHubs = value; }
 
-        public void AddSensorHub(BaseSensorHub sensorHub)
+        public async void AddSensorHub(BaseSensorHub sensorHub)
         {
             foreach(var sensor in sensorHub.Sensors)
             {
                 sensor.SensorValuesUpdated += Sensor_SensorValuesUpdated;
             }
-            _sensorHubs.Add(sensorHub);
+
+            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                CoreDispatcherPriority.Normal,
+                () =>
+                {
+                    _sensorHubs.Add(sensorHub);
+                    //OnPropertyChanged("SensorHubs");
+                    //_output.Text = text;
+                });
+
+            
         }
 
         private void Sensor_SensorValuesUpdated(object sender, SensorValuesUpdatedEventArgs e)

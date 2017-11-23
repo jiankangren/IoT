@@ -38,9 +38,7 @@ namespace HomeSensorApp.Models
         {
             _isInitialized = true;
             this.StatusMessage = "Running";
-
             SuccessfulInitialized?.Invoke(this, EventArgs.Empty);
-
             StartTimer();
         }
 

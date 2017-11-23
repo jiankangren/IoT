@@ -31,47 +31,13 @@ namespace HomeSensorApp.Views
 
         private void RootPage_Loaded(object sender, RoutedEventArgs e)
         {
-            CreateSensors();
+            //CreateSensors();
+
+            _root.Navigate(typeof(PureSensorViewPage));
         }
 
         #endregion
 
-        private void CreateSensors()
-        {
-            // Fezhat
-            var fezhat = new FezhatSensorHub();
-            fezhat.SuccessfulInitialized += (s, e) =>
-            {
-                if (fezhat.IsSensorHubInstalled)
-                {
-                    App.AppSettings.AddSensorHub(fezhat);
-                }
-            };
-            fezhat.StartInitialize();
-
-            // Sensehat
-            var sensehat = new SenseHatSensorHub();
-            sensehat.SuccessfulInitialized += (s, e) =>
-            {
-                if (sensehat.IsSensorHubInstalled)
-                {
-                    App.AppSettings.AddSensorHub(sensehat);
-                }
-            };
-            //sensehat.InitializationFailed += (s, e) =>
-            //{
-            //    App.AppSettings.SensorHubs.Add(sensehat);
-            //};
-            sensehat.StartInitialize();
-
-            // Simulator
-            var sim = new SimulatedSensorHub();
-            sim.StartInitialize();
-            if (sim.IsSensorHubInstalled)
-            {
-                App.AppSettings.AddSensorHub(sim);
-            }
-        }
 
         DispatcherTimer _timer = new DispatcherTimer();
 
@@ -85,11 +51,8 @@ namespace HomeSensorApp.Views
             _timer.Interval = new TimeSpan(0, 0, 1);
             _timer.Start();
 
-            _root.Navigate(typeof(PureSensorViewPage));
-
             // Create Sensors
 
         }
-
     }
 }

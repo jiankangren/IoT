@@ -1,8 +1,6 @@
-﻿using HomeSensorApp.Services;
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Windows.UI.Xaml;
 
 namespace HomeSensorApp.Models
 {
