@@ -61,7 +61,7 @@ namespace HomeSensorApp
                 //
 
                 AppSettings = (ApplicationSettings)Resources["ApplicationSettings"];
-                SensorService = new SensorService(AppSettings);
+                SensorService = (SensorService)Resources["SensorService"]; // new SensorService();
                 //SensorService.CreateSensors(AppSettings);
 
                 Window.Current.Activate();

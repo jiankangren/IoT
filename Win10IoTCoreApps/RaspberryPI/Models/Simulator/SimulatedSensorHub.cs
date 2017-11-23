@@ -21,10 +21,10 @@
             //windspeed.UpdateIntervalEnabled = true;
             AddSensor(windspeed);
 
-            foreach(var sensor in Sensors)
-            {
-                sensor.UpdateIntervalEnabled = true;
-            }
+            //foreach(var sensor in Sensors)
+            //{
+            //    sensor.UpdateIntervalEnabled = true;
+            //}
         }
     }
 }

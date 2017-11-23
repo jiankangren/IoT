@@ -10,15 +10,18 @@
     d:DesignWidth="400">
 
     <Grid>
-        <StackPanel Margin="8">
-            <TextBlock Text="{Binding Name}" Foreground="Yellow" />
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{Binding Name}" Foreground="White" FontSize="12" />
+            <TextBlock Text=": " Foreground="White" FontSize="12" />
             <TextBlock Text="{Binding StatusMessage}" Foreground="Yellow" />
+            </StackPanel>
             <ListView ItemsSource="{Binding Sensors}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" >
-                            <TextBlock Text="{Binding Name}" Foreground="Green"/>
-                            <TextBlock Text=":" />
+                            <TextBlock Text="{Binding Name}" Foreground="Red"/>
+                            <TextBlock Text=": " />
                             <TextBlock Text="{Binding SensorValue}" />
                         </StackPanel>
                     </DataTemplate>

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Windows.ApplicationModel.Core;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 
 namespace HomeSensorApp.Models
@@ -26,6 +28,7 @@ namespace HomeSensorApp.Models
         public void AddSensor(BaseSensor sensor)
         {
             sensor.Parent = this;
+            sensor.UpdateIntervalEnabled = true;
             _sensors.Add(sensor);
         }
 
@@ -34,12 +37,17 @@ namespace HomeSensorApp.Models
         public event EventHandler SuccessfulInitialized;
         public event EventHandler InitializationFailed;
 
-        public void OnSuccessfulInitialized()
+        public async void OnSuccessfulInitialized()
         {
-            _isInitialized = true;
-            this.StatusMessage = "Running";
-            SuccessfulInitialized?.Invoke(this, EventArgs.Empty);
-            StartTimer();
+            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                CoreDispatcherPriority.Normal,
+                () =>
+                {
+                    _isInitialized = true;
+                    this.StatusMessage = "Running";
+                    SuccessfulInitialized?.Invoke(this, EventArgs.Empty);
+                    StartTimer();
+                });
         }
 
         private void StartTimer()

@@ -5,7 +5,8 @@
     xmlns:local="using:HomeSensorApp.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" DataContext="{StaticResource ApplicationSettings}">
+    mc:Ignorable="d" 
+    DataContext="{StaticResource SensorService}">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <ListView Margin="40,0,40,0" DataContext="{Binding SensorHubs}" ItemsSource="{Binding}">
