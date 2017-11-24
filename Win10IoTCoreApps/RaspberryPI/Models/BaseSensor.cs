@@ -34,6 +34,7 @@ namespace HomeSensorApp.Models
             set
             {
                 _updateIntervalEnabled = value;
+                GetValue();
                 UpdateTimer();
                 OnPropertyChanged();
             }
