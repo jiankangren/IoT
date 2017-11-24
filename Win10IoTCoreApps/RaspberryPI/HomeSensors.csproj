@@ -95,7 +95,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\ApplicationSettings.cs" />
+    <Compile Include="Services\SettingsService.cs" />
     <Compile Include="Models\BaseSensor.cs" />
     <Compile Include="Models\BaseSensorHub.cs" />
     <Compile Include="Models\Fezhat\BaseFezhatSensor.cs" />
@@ -130,6 +130,9 @@
     </Compile>
     <Compile Include="Views\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VirtualSensorsPage.xaml.cs">
+      <DependentUpon>VirtualSensorsPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +169,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\VirtualSensorsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

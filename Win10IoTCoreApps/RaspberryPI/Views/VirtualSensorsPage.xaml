@@ -1,0 +1,28 @@
+﻿<Page
+    x:Class="HomeSensorApp.Views.VirtualSensorsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HomeSensorApp.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel>
+            <TextBlock Text="Temperature" />
+            <Slider x:Name="_temperature" Minimum="-40" Maximum="100" ValueChanged="_temperature_ValueChanged" />
+
+            <TextBlock Text="Wind speed" />
+            <Slider x:Name="_windSpeed" Minimum="0" Maximum="200" ValueChanged="_windSpeed_ValueChanged" />
+
+            <TextBlock Text="Movement detected" />
+            <Button x:Name="_movementDetected" Click="_movementDetected_Click" Content="Movement Detected"/>
+            
+            <TextBlock Text="Camera" />
+            <Button x:Name="_cameraPicture" Content="Take Picture" Click="_cameraPicture_Click"/>
+            
+            <TextBlock Text="Light Button" />
+            <ToggleSwitch x:Name="_light" Toggled="_light_Toggled" />
+        </StackPanel>
+    </Grid>
+</Page>

@@ -2,13 +2,11 @@
     x:Class="HomeSensorApp.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:HomeSensorApp"
-    xmlns:models="using:HomeSensorApp.Models"
     xmlns:services="using:HomeSensorApp.Services"
     RequestedTheme="Dark">
 
     <Application.Resources>
-        <models:ApplicationSettings x:Key="ApplicationSettings" />
+        <services:SettingsService x:Key="ApplicationSettings" />
         <services:SensorService x:Key="SensorService" />
         <services:IotHubService x:Key="IoTHubService" />
     </Application.Resources>

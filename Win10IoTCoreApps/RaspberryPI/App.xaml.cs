@@ -21,8 +21,8 @@ namespace HomeSensorApp
 
         public static CoreDispatcher AppDispatcher { get; internal set; }
 
-        private static ApplicationSettings _appSettings;
-        public static ApplicationSettings AppSettings { get => _appSettings; set => _appSettings = value; }
+        private static SettingsService _appSettings;
+        public static SettingsService AppSettings { get => _appSettings; set => _appSettings = value; }
 
         private static SensorService _sensorService;
         public static SensorService SensorService { get => _sensorService; set => _sensorService = value; }
@@ -62,7 +62,7 @@ namespace HomeSensorApp
                 // Custom
                 //
 
-                AppSettings = (ApplicationSettings)Resources["ApplicationSettings"];
+                AppSettings = (SettingsService)Resources["ApplicationSettings"];
                 SensorService = (SensorService)Resources["SensorService"]; // new SensorService();
                 IotHubService = (IotHubService)Resources["IoTHubService"];
                 IotHubService.SetSettings(AppSettings);

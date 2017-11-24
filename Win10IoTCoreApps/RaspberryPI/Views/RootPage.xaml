@@ -25,13 +25,14 @@
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,40,0">
                 <Button Margin="8" x:Name="_home" Content="Home" Click="_home_Click" />
+                <Button Margin="8" x:Name="_virtual" Content="Virtual Sensors" Click="_virtual_Click" />
                 <Button Margin="8" x:Name="_settings" Content="Settings" Click="_settings_Click" />
             </StackPanel>
         </Grid>
 
         <!-- Frame -->
         <Grid Grid.Row="1" Grid.RowSpan="2">
-            <Frame x:Name="_root" Grid.RowSpan="2" />
+            <Frame Margin="40,0,40,0"  x:Name="_root" Grid.RowSpan="2" />
         </Grid>
         
         <!-- Footer -->

@@ -31,9 +31,13 @@ namespace HomeSensorApp.Views
 
         private void RootPage_Loaded(object sender, RoutedEventArgs e)
         {
-            //CreateSensors();
-
             _root.Navigate(typeof(PureSensorViewPage));
+            _virtual.Visibility = Settings.IsDisplayConnected ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void _virtual_Click(object sender, RoutedEventArgs e)
+        {
+            _root.Navigate(typeof(VirtualSensorsPage));
         }
 
         #endregion
@@ -52,7 +56,7 @@ namespace HomeSensorApp.Views
             _timer.Start();
 
             // Create Sensors
-
         }
+
     }
 }

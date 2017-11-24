@@ -1,14 +1,15 @@
-﻿using HomeSensorApp.Services;
+﻿using HomeSensorApp.Models;
 using System;
 using Windows.Storage;
 
-namespace HomeSensorApp.Models
+namespace HomeSensorApp.Services
 {
-    public class ApplicationSettings : NotifyPropertyBase
+    public class SettingsService : NotifyPropertyBase
     {
-        public ApplicationSettings()
+        public SettingsService()
         {
             _localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            _localSettings.Values.Clear();
         }
 
         ApplicationDataContainer _localSettings;

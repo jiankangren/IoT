@@ -8,7 +8,7 @@
     mc:Ignorable="d" DataContext="{StaticResource ApplicationSettings}">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <ScrollViewer Margin="40,0,40,0">
+        <ScrollViewer>
             <StackPanel>
                 <TextBlock Text="Device Id" />
                 <TextBox Text="{Binding DeviceId, Mode=TwoWay}" />

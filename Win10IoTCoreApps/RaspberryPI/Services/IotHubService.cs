@@ -13,7 +13,7 @@ namespace HomeSensorApp.Services
 
         }
 
-        internal void SetSettings(ApplicationSettings appSettings)
+        internal void SetSettings(SettingsService appSettings)
         {
             SetConnectionString(appSettings.DeviceConnectionString);
         }

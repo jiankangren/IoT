@@ -9,7 +9,7 @@
     DataContext="{StaticResource SensorService}">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <ListView Margin="40,0,40,0" DataContext="{Binding SensorHubs}" ItemsSource="{Binding}">
+        <ListView DataContext="{Binding SensorHubs}" ItemsSource="{Binding}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
