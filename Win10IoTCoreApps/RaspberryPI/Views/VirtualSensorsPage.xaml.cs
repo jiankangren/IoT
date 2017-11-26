@@ -40,7 +40,7 @@ namespace HomeSensorApp.Views
 
         private void _light_Toggled(object sender, RoutedEventArgs e)
         {
-            SendMessage("Light", _light.IsOn);
+            SendMessage("LightButton", _light.IsOn);
         }
 
         private void SendMessage(string sensorName, object sensorValue)

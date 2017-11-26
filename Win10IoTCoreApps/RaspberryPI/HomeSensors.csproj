@@ -98,6 +98,9 @@
     <Compile Include="Controls\ClockControl.xaml.cs">
       <DependentUpon>ClockControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\OfflineOnlineControl.xaml.cs">
+      <DependentUpon>OfflineOnlineControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Services\SettingsService.cs" />
     <Compile Include="Models\BaseSensor.cs" />
     <Compile Include="Models\BaseSensorHub.cs" />
@@ -122,8 +125,14 @@
     <Compile Include="Services\SensorService.cs" />
     <Compile Include="Services\StatusMessageEventArgs.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="Views\DebugPage.xaml.cs">
+      <DependentUpon>DebugPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DetailedSensorHubControl.xaml.cs">
       <DependentUpon>DetailedSensorHubControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DeviceTwinPage.xaml.cs">
+      <DependentUpon>DeviceTwinPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
@@ -156,6 +165,7 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="_todo.txt" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -166,11 +176,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\OfflineOnlineControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\DebugPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\DetailedSensorHubControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DeviceTwinPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

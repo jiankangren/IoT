@@ -1,0 +1,4 @@
+﻿# Add Device Twin Features
+# Add offline support
+# Background - Color as Device Property
+# Simulated Sensors via Settings on/off

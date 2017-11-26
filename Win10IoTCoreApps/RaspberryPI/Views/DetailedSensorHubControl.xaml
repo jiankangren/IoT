@@ -12,9 +12,9 @@
     <Grid>
         <StackPanel>
             <StackPanel Orientation="Horizontal">
-            <TextBlock Text="{Binding Name}" Foreground="White" FontSize="12" />
-            <TextBlock Text=": " Foreground="White" FontSize="12" />
-            <TextBlock Text="{Binding StatusMessage}" Foreground="Yellow" />
+                <TextBlock Text="{Binding Name}" Foreground="White" FontSize="12" />
+                <TextBlock Text=": " Foreground="White" FontSize="12" />
+                <TextBlock Text="{Binding StatusMessage}" Foreground="Yellow" />
             </StackPanel>
             <ListView ItemsSource="{Binding Sensors}">
                 <ListView.ItemTemplate>

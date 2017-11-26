@@ -31,10 +31,13 @@ namespace HomeSensorApp.Services
             {
                 sensorHubName = sensorValue.SensorHubName,
                 sensorName = sensorValue.SensorName,
-                sensorValue = sensorValue.SensorValue
+                sensorValue = sensorValue.SensorValue,
+                sensorValueText = sensorValue.SensorValueAsText
             };
             var messageString = JsonConvert.SerializeObject(telemetryDataPoint);
             var message = new Message(Encoding.ASCII.GetBytes(messageString));
+            message.MessageId = Guid.NewGuid().ToString();
+
             //message.Properties.Add("temperatureAlert", (currentTemperature > 30) ? "true" : "false");
 
             await _deviceClient.SendEventAsync(message);
@@ -46,7 +49,7 @@ namespace HomeSensorApp.Services
             SensorValuePackage data = new SensorValuePackage();
             data.SensorHubName = "App";
             data.SensorName = source;
-            data.SensorValue = message;
+            data.SensorValueAsText = message;
 
             SendDeviceToCloud(data);
         }

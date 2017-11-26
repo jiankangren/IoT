@@ -1,8 +1,4 @@
-﻿using HomeSensorApp.Models.Fezhat;
-using HomeSensorApp.Models.Sensehat;
-using HomeSensorApp.Models.Simulator;
-using System;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace HomeSensorApp.Views
@@ -12,13 +8,11 @@ namespace HomeSensorApp.Views
         public RootPage()
         {
             this.InitializeComponent();
-
         }
-
 
         private void NavView_Loaded(object sender, RoutedEventArgs e)
         {
-
+            NavigateTo("sensors");
         }
 
         private void NavView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
@@ -60,13 +54,12 @@ namespace HomeSensorApp.Views
                 case "softwaresensors":
                     ContentFrame.Navigate(typeof(VirtualSensorsPage));
                     break;
+
+                case "devicetwin":
+                    ContentFrame.Navigate(typeof(DeviceTwinPage));
+                    break;
             }
-        }
-
-        private void More_Click(object sender, RoutedEventArgs e)
-        {
-
+            NavView.IsPaneOpen = false;
         }
     }
-
 }
