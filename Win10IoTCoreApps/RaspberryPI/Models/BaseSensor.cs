@@ -71,10 +71,13 @@ namespace HomeSensorApp.Models
         public string SensorValue
         {
             get { return _sensorValue; }
-            set { _sensorValue = value; OnPropertyChanged(); }
+            set { _sensorValue = value; OnPropertyChanged(); LastUpdate = DateTime.Now;  }
         }
 
         public BaseSensorHub Parent { get; internal set; }
+        public DateTime LastUpdate { get => _lastUpdate; set { _lastUpdate = value; OnPropertyChanged(); } }
+
+        private DateTime _lastUpdate;
 
         public void SensorValueUpdated(object sensorValue)
         {

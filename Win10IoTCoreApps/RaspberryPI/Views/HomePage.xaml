@@ -9,7 +9,7 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <TextBlock Text="Servus" FontSize="100"/>
         <Custom:ClockControl HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
     </Grid>

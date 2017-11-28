@@ -8,12 +8,12 @@
         // 
         // Windows App on Windows - Surface
         // 
-        public static string DefaultDeviceId = "windows001";
-        public static string DefaultSharedAccessKey = "Hmg0mqGgNjzW2B3nJnH/S0obyblhdSddm4ioHKbnVpc=";
-        public static bool IsSensehatInstalled = false;
-        public static bool IsFezhatInstalled = false;
-        public static bool IsDisplayConnected = true;
-        public static bool IsSimulatedSensorAvailable = true;
+        //public static string DefaultDeviceId = "windows001";
+        //public static string DefaultSharedAccessKey = "Hmg0mqGgNjzW2B3nJnH/S0obyblhdSddm4ioHKbnVpc=";
+        //public static bool IsSensehatInstalled = false;
+        //public static bool IsFezhatInstalled = false;
+        //public static bool IsDisplayConnected = true;
+        //public static bool IsSimulatedSensorAvailable = true;
 
         // 
         // Windows App on Windows - HP7Stream
@@ -28,12 +28,12 @@
         // 
         // winpi001 Settings - Smarti PI
         // 
-        //public static string DefaultDeviceId = "winpi001";
-        //public static string DefaultSharedAccessKey = "V05R254hEkusyL6ud27HVgeQpzAoAmNIXQRtDUBDAaI=";
-        //public static bool IsSensehatInstalled = true;
-        //public static bool IsFezhatInstalled = !IsSensehatInstalled;
-        //public static bool IsDisplayConnected = true;
-        //public static bool IsSimulatedSensorAvailable = false;
+        public static string DefaultDeviceId = "winpi001";
+        public static string DefaultSharedAccessKey = "V05R254hEkusyL6ud27HVgeQpzAoAmNIXQRtDUBDAaI=";
+        public static bool IsSensehatInstalled = true;
+        public static bool IsFezhatInstalled = !IsSensehatInstalled;
+        public static bool IsDisplayConnected = true;
+        public static bool IsSimulatedSensorAvailable = false;
 
         //
         // winpi002 Settings

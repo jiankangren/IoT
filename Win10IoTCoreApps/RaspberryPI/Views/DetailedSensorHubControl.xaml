@@ -11,19 +11,27 @@
 
     <Grid>
         <StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding Name}" Foreground="White" FontSize="12" />
-                <TextBlock Text=": " Foreground="White" FontSize="12" />
-                <TextBlock Text="{Binding StatusMessage}" Foreground="Yellow" />
+            <StackPanel Orientation="Vertical" Margin="8">
+                <TextBlock Text="{Binding Name}" Foreground="White" Style="{StaticResource SubheaderTextBlockStyle}"/>
+                <TextBlock Text="{Binding StatusMessage}" Foreground="Yellow" Style="{StaticResource CaptionTextBlockStyle}"/>
             </StackPanel>
             <ListView ItemsSource="{Binding Sensors}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal" >
-                            <TextBlock Text="{Binding Name}" Foreground="Red"/>
-                            <TextBlock Text=": " />
-                            <TextBlock Text="{Binding SensorValue}" />
-                        </StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Column="0" Text="{Binding Name}" Style="{StaticResource CaptionTextBlockStyle}"/>
+                            <TextBlock Grid.Column="1" Text="{Binding SensorValue}" Style="{StaticResource CaptionTextBlockStyle}"/>
+                            <TextBlock Grid.Row="1" Text="Last Update" Style="{StaticResource CaptionTextBlockStyle}"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding LastUpdate}" Style="{StaticResource CaptionTextBlockStyle}"/>
+                        </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
