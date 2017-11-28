@@ -99,7 +99,7 @@ sudo apt install -y samba
 To configure samba: 
 
 ```  
-sudo leafpad /etc/samba/smb.conf &
+sudo nano /etc/samba/smb.conf
 ``` 
 
 First Change [global] section 
