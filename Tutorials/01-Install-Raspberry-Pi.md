@@ -162,6 +162,14 @@ Fix https://github.com/moby/moby/issues/22635
 add the following line to /etc/resolv.conf
 nameserver 8.8.8.8
 
+There is currently an Issue with version 17.11.
+Downgrade to 17.09
+```
+// https://github.com/moby/moby/issues/35587
+
+sudo apt-get install -y docker-ce=17.09.0~ce-0~raspbian --allow-downgrades
+
+```
 
 ## Summary
 

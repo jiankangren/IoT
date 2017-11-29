@@ -19,6 +19,7 @@ Edge Explorer --> Create Device
 ### Step x: Install IoT Edge runtime on device
 
 ```
+sudo apt-get install python-pip
 sudo apt-get install python2.7-dev libffi-dev libssl-dev
 sudo pip install -U azure-iot-edge-runtime-ctl
 ```
