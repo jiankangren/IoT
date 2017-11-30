@@ -153,17 +153,19 @@ The installation is done with one single command:
 
 ```
 curl -sSL https://get.docker.com | sh
-
 sudo usermod -aG docker pi
 ```
 
+### Issue: Can't connect to container registry (sometimes)
 Fix https://github.com/moby/moby/issues/22635
 
 add the following line to /etc/resolv.conf
 nameserver 8.8.8.8
 
-There is currently an Issue with version 17.11.
-Downgrade to 17.09
+### Issue: 500 Server Error when working with IoT Edge Preview
+
+There is currently an Issue with version 17.11. You need to downgrade to Version 17.09.
+
 ```
 // https://github.com/moby/moby/issues/35587
 

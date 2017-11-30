@@ -48,6 +48,14 @@ sudo docker ps
 
 ### Step x: Install Python 2.7 on Windows
 
+### Step x: Install Visual Studio Code
+
+#### Required/Cool Extensions
+
+Docker
+
+Iot Edge 
+
 ### Step x: Install IoT Edge Control Script
 
 ```
@@ -97,53 +105,4 @@ To continuesly check a container use:
 ```
 sudo docker logs -f tempSensor
 ```
-
-
-## Create an IoT Edge module project
-
-1. Open VS Code
-1. Open Terminal in VS Code
-1. Install Template for AzureIoTEdgeModule
-    ```
-    dotnet new -i Microsoft.Azure.IoT.Edge.Module
-    ```
-1. Create new Project
-    ```
-    dotnet new aziotedgemodule -n FilterModule
-    ```
-1. The Code
-    ``` csharp
-    using todo ...
-    ```
-1. Build Docker Image for Target platform
-1. Create ACR if not already exist
-1. Login to ACR
-    ``` 
-    docker login -u <username> -p <password> <Login server>
-    ``` 
-1. Push to registry
-    Push the image to your Docker repository. Use the View | Command Palette ... | Edge: Push IoT Edge module Docker image menu command and enter the image name in the pop-up text box at the top of the VS Code window.   Use the same image name you used in step 1.c.
-1. Add registry credentials to Edge runtime on your Edge device
-    For Windows, run the following command:
-    ```
-    iotedgectl login --address <docker-registry-address> --username <docker-username> --password <docker-password> 
-    ```
-
-    For Linux, run the following command:
-    ```
-    sudo iotedgectl login --address <docker-registry-address> --username <docker-username> --password <docker-password> 
-    ```
-
-
-
-
-## Tricks
-
-### Let's start the IoT Edge runtime on start of Raspberry Pi
-
-
-
-# Helpful Tools
-
-## Device Explorer
 
