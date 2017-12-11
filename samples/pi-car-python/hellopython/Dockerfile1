@@ -1,0 +1,6 @@
+# ubuntubase
+FROM ubuntu
+
+RUN apt-get update -y
+
+RUN apt-get install python2.7 python-pip sudo git cmake build-essential curl libcurl4-openssl-dev libssl-dev uuid-dev libboost-python-dev libboost-all-dev python2.7-dev -y

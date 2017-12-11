@@ -1,0 +1,1 @@
+python iothub_client_sample.py -c "HostName=oscheeriothub.azure-devices.net;DeviceId=pythondevice001;SharedAccessKey=N+7DT1fDKGurce2xHBA587lY/1UMfYS53seta6eM7VY=" -p mqtt

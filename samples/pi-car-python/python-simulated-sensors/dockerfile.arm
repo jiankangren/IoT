@@ -1,0 +1,21 @@
+FROM python:2.7
+
+ADD iothub_client_args.py /
+ADD iothub_client_cert.py / 
+ADD simulatedsensors.py /
+
+
+RUN apt-get update -y
+# RUN apt-get install python-pip
+
+RUN pip install azure-iothub-device-client
+RUN pip install azure-iothub-service-client
+
+RUN git clone --recursive https://github.com/Azure/azure-iot-sdk-python.git 
+
+#azure-iot-sdk-python
+
+# RUN ./setup.sh --python-version 2.7
+# RUN ./build.sh
+
+# CMD ["python", "./simulatedsensors.py", "-c 'HostName=oscheeriothub.azure-devices.net;DeviceId=pythondevice001;SharedAccessKey=N+7DT1fDKGurce2xHBA587lY/1UMfYS53seta6eM7VY=' -p mqtt"]

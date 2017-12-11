@@ -1,0 +1,21 @@
+FROM python-gitclone:latest
+
+# RUN git clone --recursive https://github.com/Azure/azure-iot-sdk-python.git 
+
+RUN ./azure-iot-sdk-python/build_all/linux/setup.sh --python-version=2.7
+RUN ./azure-iot-sdk-python/build_all/linux/build.sh
+
+# ADD iothub_client_args.py /
+# ADD iothub_client_cert.py / 
+# ADD simulatedsensors.py /
+
+RUN mkdir /data
+
+RUN cp ./azure-iot-sdk-python/device/samples/iothub_client.so /data
+RUN cp ./azure-iot-sdk-python/device/samples/iothub_client_cert.py /data
+RUN cp ./azure-iot-sdk-python/device/samples/iothub_client_args.py /data
+
+# CMD ["python", "./simulatedsensors.py", "-c", "HostName=oscheeriothub.azure-devices.net;DeviceId=pythondevice001;SharedAccessKey=N+7DT1fDKGurce2xHBA587lY/1UMfYS53seta6eM7VY=", "-p mqtt"]
+# CMD ["build.sh"]
+
+VOLUME /data

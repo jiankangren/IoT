@@ -1,0 +1,15 @@
+FROM pythonsdk3
+
+WORKDIR /azure-iot-sdk-python/build_all/linux/
+
+RUN ./build.sh 
+
+RUN mkdir /outputsdk
+RUN mkdir /outputsdk/device
+RUN mkdir /outputsdk/service
+
+# WORKDIR /
+
+# copy files out of container
+RUN cp -a /azure-iot-sdk-python/service/samples/. /outputsdk/service 
+RUN cp -a /azure-iot-sdk-python/device/samples/. /outputsdk/device

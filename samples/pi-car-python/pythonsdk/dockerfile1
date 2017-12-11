@@ -1,0 +1,12 @@
+# sdk build machine
+FROM ubuntu
+
+RUN apt-get update
+RUN apt-get install -y git cmake build-essential curl libcurl4-openssl-dev libssl-dev uuid-dev
+
+# GCC - install
+# RUN add-apt-repository ppa:ubuntu-toolchain-r/test
+# RUN apt-get update
+RUN apt-get install gcc-4.9 g++-4.9 -y
+# RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 60 --slave /usr/bin/g++ g++ /usr/bin/g++-4.9
+

@@ -1,0 +1,18 @@
+# pythonapp
+FROM ubuntubase
+
+RUN pip install azure-iothub-device-client
+RUN pip install azure-iothub-service-client
+
+ADD iothub_client_args.py .
+ADD iothub_client_cert.py .
+ADD iothub_client_cert.pyc .
+ADD iothub_client_prov_args.py .
+ADD iothub_client_args.pyc .
+ADD iothub_client_prov_hsm_sample.py .
+ADD iothub_client_sample_class.py .
+ADD iothub_client_sample_x509.py .
+ADD iothub_client_sample.py .
+ADD iothub_client_shared_transport_sample.py .
+
+

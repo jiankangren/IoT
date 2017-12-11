@@ -1,0 +1,11 @@
+FROM python-gitbuild:latest
+
+ADD iothub_client.so /
+ADD iothub_client_args.py /
+ADD iothub_client_cert.py / 
+ADD simulatedsensors.py /
+
+# RUN cp ./azure-iot-sdk-python/service/tests/iothub_client.so ./
+
+# CMD ["python", "./simulatedsensors.py", "-c", "HostName=oscheeriothub.azure-devices.net;DeviceId=pythondevice001;SharedAccessKey=N+7DT1fDKGurce2xHBA587lY/1UMfYS53seta6eM7VY=", "-p mqtt"]
+

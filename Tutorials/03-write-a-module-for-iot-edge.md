@@ -45,6 +45,7 @@
 
 1. Create ACR if not already exist
 
+
 1. Login to ACR
 
     ``` 
@@ -52,8 +53,12 @@
 
     ``` 
 1. Push to registry
+
     Push the image to your Docker repository. Use the View | Command Palette ... | Edge: Push IoT Edge module Docker image menu command and enter the image name in the pop-up text box at the top of the VS Code window.   Use the same image name you used in step 1.c.
+
+
 1. Add registry credentials to Edge runtime on your Edge device
+
     For Windows, run the following command:
     ```
     iotedgectl login --address <docker-registry-address> --username <docker-username> --password <docker-password> 
@@ -64,6 +69,7 @@
     sudo iotedgectl login --address <docker-registry-address> --username <docker-username> --password <docker-password> 
     ```
 
+1. Add 
 
 
 

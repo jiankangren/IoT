@@ -1,0 +1,7 @@
+FROM pythonsdk2
+
+RUN apt-get install sudo -y
+
+WORKDIR /azure-iot-sdk-python/build_all/linux/
+
+RUN ./setup.sh 

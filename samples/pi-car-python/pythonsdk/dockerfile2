@@ -1,0 +1,4 @@
+FROM pythonsdk1
+
+RUN git clone --recursive https://github.com/Azure/azure-iot-sdk-python.git 
+
