@@ -168,9 +168,53 @@ There is currently an Issue with version 17.11. You need to downgrade to Version
 
 ```
 // https://github.com/moby/moby/issues/35587
-
 sudo apt-get install -y docker-ce=17.09.0~ce-0~raspbian --allow-downgrades
 
+```
+
+## Additional Step: Install dotnet core
+
+
+
+
+### Version1
+
+```
+sudo apt-get install curl libunwind8 gettext
+
+curl -sSL -o dotnet.tar.gz https://dotnetcli.blob.core.windows.net/dotnet/Runtime/release/2.0.0/dotnet-runtime-latest-linux-arm.tar.gz 
+
+sudo mkdir -p /opt/dotnet && sudo tar zxf dotnet.tar.gz -C /opt/dotnet 
+
+sudo ln -s /opt/dotnet/dotnet /usr/local/bin
+
+dotnet --help
+```
+
+### Version 2
+```
+# Update Ubuntu 16.04
+sudo apt-get -y update
+
+# Install the packages necessary for .NET Core
+sudo apt-get -y install libunwind8 libunwind8-dev gettext libicu-dev liblttng-ust-dev libcurl4-openssl-dev libssl-dev uuid-dev
+
+# Download the latest binaries for .NET Core 2 
+wget https://dotnetcli.blob.core.windows.net/dotnet/Runtime/release/2.0.0/dotnet-runtime-latest-linux-arm.tar.gz
+
+# Make a directory for .NET Core to live in
+mkdir /home/ubuntu/dotnet
+
+# Unzip the binaries into the directory you just created
+tar -xvf dotnet-runtime-latest-linux-arm.tar.gz -C /home/ubuntu/dotnet
+
+# Now add the path to the dotnet executable to the environment path
+# This ensures the next time you log in, the dotnet exe is on your path
+echo "PATH=\$PATH:/home/ubuntu/dotnet" >> dotnetcore.sh
+sudo mv dotnetcore.sh /etc/profile.d
+
+# Then run the command below to add the path to the dotnet executable to the current session
+PATH=$PATH:/home/ubuntu/dotnet
 ```
 
 ## Summary
