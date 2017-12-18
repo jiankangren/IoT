@@ -4,9 +4,11 @@ This project is dedicated to help developer to get started with Azure IoT relate
 
 ## IoT Edge - Tutorials
 
-1. [Install Raspberry Pi](Tutorials/01-Install-Raspberry-Pi.md) 
+1. [Install Raspberry Pi](Tutorials/01-Install-Raspberry-Pi/readme.md) 
 
-    A guide to install a new Raspberry Pi from zero to ready to use. Including setting it up headless, ssh, VNC, and docker. 
+    A guide to install a new Raspberry Pi from zero to ready to use. Including setting it up headless, ssh, VNC, dotnet core,  and docker. 
+
+    
 
 1. [Getting started with IoT Edge](Tutorials/02-azure-iot-edge-getting-started.md)
 
