@@ -217,6 +217,11 @@ sudo mv dotnetcore.sh /etc/profile.d
 PATH=$PATH:/home/ubuntu/dotnet
 ```
 
+## Remove need of sudo for dotnet
+```
+sudo usermod -aG dotnet pi
+```
+
 ## Summary
 
 Now you have a Raspberry Pi, which is ready to use with VNC and File Access with a share. This setup is used in the next tutorials.

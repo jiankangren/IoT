@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Threading;
-using Unosquare.RaspberryIO;
-using Unosquare.RaspberryIO.Gpio;
 
 namespace XmasTreeApp
 {
@@ -17,18 +15,20 @@ namespace XmasTreeApp
             for(int i=0;i<5; i++)
             {
                 tree.AllOn();
-                Thread.Sleep(1000);
+                Thread.Sleep(200);
                 tree.AllOff();
-                Thread.Sleep(1000);
+                Thread.Sleep(200);
             }
 
-            tree.JustBlink();
-            // tree.UpAndDown();
+            // tree.JustBlink();
+            tree.UpAndDown();
+            // tree.PinChecker();
+            // tree.DayUp();
+
+            // tree.PinDown();
             
             Logger.Log("Press key to quit.");
             Console.ReadKey();
         }
-
-        
     }
 }

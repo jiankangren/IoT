@@ -3,7 +3,6 @@ using System.Threading;
 using Unosquare.RaspberryIO;
 using Unosquare.RaspberryIO.Gpio;
 
-
 namespace XmasTreeApp
 {
     public class XmasTree
@@ -14,12 +13,58 @@ namespace XmasTreeApp
         }
 
         
-        int[] gpio = new [] {24,6,27,14,2,21,25,13,7,23,1,3,22,28,26,5,4,12,11,29};
+        // gpio --> Day
+        int[] gpio = new [] {
+            9, 
+            15, 
+            16,
+            17,
+            18,
+            19, 
+            20,
+            30,
+            31,
+            32, 
+             8, // 0 Checked Stern!!!!
+             7, // 1 Checked
+             0, // 2 ??? falsch
+            23, // 3 c
+            29, // 4 C
+             6, // 5 C
+            10, // 6 C
+            21, // 7 tbd falsch
+            12, // 8 C
+            27, // 9 C
+             0, // 10 C
+             2, // 11 C
+            25, // 12 C
+             5, // 13 C
+            13, // 14 C
+            26, // 15 C
+            22, // 16 C
+            28, // 17 C
+            24, // 18 C
+            21, // 19 C tbd
+             1, // 20 C
+            14, // 21 C
+            11, // 22 C
+             4, // 23 C
+             3, // 24 C
+            };
+
         Random rnd = new Random();
+
+        #region Led Helper
+
+        public void SwitchDay(int day, bool on) 
+        {
+            Logger.Log($"Day: {day} Status: {on}");
+            int pinId = gpio[day];
+            SwitchLed(pinId, on);
+        }
 
         public void SwitchLed(int pinId, bool on) 
         {
-            // Version 1
             Logger.Log($"SwitchLed: GPIO: {pinId} Status: {on}");
             try 
             {
@@ -29,13 +74,13 @@ namespace XmasTreeApp
             }
             catch (Exception exc) 
             {
+                Logger.Log($"SwitchLed: GPIO: {pinId} Status: {on}");
                 Logger.Log(exc);
             }
         }
 
         public void ToggleLed(int pinId) 
         {
-            Logger.Log($"ToggleLed: GPIO-{pinId} ");
             try 
             {
                 var led = Pi.Gpio[pinId];
@@ -45,9 +90,29 @@ namespace XmasTreeApp
             }
             catch (Exception exc) 
             {
+                Logger.Log($"ToggleLed: GPIO-{pinId} ");
                 Logger.Log(exc);
             }
         }
+
+        #endregion
+
+        #region Pin Checker
+
+        public void PinChecker() 
+        {
+            int sleep = 5000;
+            for(int i=0; i<60; i++)
+            {
+                Logger.Log($"Pin: {i}");
+                SwitchLed(i, true);
+                Thread.Sleep(sleep);
+                SwitchLed(i, false);
+                Thread.Sleep(sleep);
+            }
+        }
+
+        #endregion
 
         #region Program AllOn
 
@@ -57,6 +122,7 @@ namespace XmasTreeApp
             for(int i=0;i<gpio.Length;i++)
             {
                 SwitchLed(gpio[i], true);
+                Thread.Sleep(10);
             }
         }
 
@@ -66,6 +132,7 @@ namespace XmasTreeApp
             for(int i=0;i<gpio.Length;i++)
             {
                 SwitchLed(gpio[i], false);
+                Thread.Sleep(10);
             }
         }
 
@@ -95,21 +162,45 @@ namespace XmasTreeApp
 
         public void UpAndDown() 
         {
+            int sleep = 5000;
+
             // On
+            AllOff();
             for(int i=0;i<gpio.Length;i++)
             {
                 SwitchLed(i, true);
-                Thread.Sleep(1000);
-            }
-
-            // Off
-            for(int i=gpio.Length-1;i>=0;i--)
-            {
+                Thread.Sleep(sleep);
                 SwitchLed(i, false);
+                Thread.Sleep(sleep);
+            }
+        }
+
+        public void DayUp() 
+        {
+            AllOff();
+            int sleep = 3000;
+            for(int i=0;i<gpio.Length;i++)
+            {
+                SwitchDay(i, true);
+                Thread.Sleep(sleep);
+                SwitchDay(i, false);
                 Thread.Sleep(1000);
             }
         }
 
+
+        public void PinDown() 
+        {
+            int sleep = 3000;
+            for(int i=39;i>0;i--)
+            {
+                Logger.Log($"---> PIN {i}");
+                SwitchLed(i, true);
+                Thread.Sleep(sleep);
+                SwitchLed(i, false);
+                Thread.Sleep(500);
+            }
+        }
         #endregion
 
     }
