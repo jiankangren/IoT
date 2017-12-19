@@ -32,6 +32,16 @@ TODO: Code
 
 # Step x: Read Device to cloud messages
 
+Create new folder and open terminal there:
+
+``` 
+dotnet new console 
+``` 
+
+Add required package
+
+
+
 TODO: Code
 
 # Step x: Create simulated sensor app

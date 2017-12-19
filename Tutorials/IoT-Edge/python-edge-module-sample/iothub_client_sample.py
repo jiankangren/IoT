@@ -153,7 +153,7 @@ def iothub_client_init():
     set_certificates(client)
     # to enable MQTT logging set to 1
     if client.protocol == IoTHubTransportProvider.MQTT:
-        client.set_option("logtrace", 0)
+        client.set_option("logtrace", 1)
     client.set_message_callback(
         receive_message_callback, RECEIVE_CONTEXT)
     if client.protocol == IoTHubTransportProvider.MQTT or client.protocol == IoTHubTransportProvider.MQTT_WS:
