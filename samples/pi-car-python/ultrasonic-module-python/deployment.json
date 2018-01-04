@@ -24,7 +24,7 @@
             "restartPolicy": "always",
             "settings": {
               "image": "microsoft/azureiotedge-hub:1.0-preview",
-              "createOptions": ""
+              "createOptions": "{\"HostConfig\": {\"Privileged\": true}}"
             }
           }
         },
