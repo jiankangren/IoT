@@ -1,0 +1,5 @@
+FROM dariuszparys/iothub-python-sdk-onbuild
+
+WORKDIR /app
+
+ADD files /.

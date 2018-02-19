@@ -1,0 +1,7 @@
+FROM dariuszparys/iothub-python-sdk-onbuild
+
+# ADD . /app
+
+# CMD ["/bin/bash", "myrun.sh"]
+
+# CMD ["/bin/bash", "myrun.sh"]
